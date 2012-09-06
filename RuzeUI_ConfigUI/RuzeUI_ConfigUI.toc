@@ -1,0 +1,6 @@
+## Interface: 50004
+## Title: |cffC495DDRuzeUI Config UI|r
+## Notes: Options for RuzeUI
+## Author: Ruze
+
+config.lua

@@ -1,0 +1,65 @@
+local T, C, L, G = unpack(Tukui)
+
+-- aMail by Alza, modified.
+local button = CreateFrame("Button", "aMailButton", InboxFrame, "UIPanelButtonTemplate")
+button:SetPoint("BOTTOM", InboxFrame, "BOTTOM", -25, 102)
+button:SetSize(128, 25)
+button:SkinButton()
+
+local text = T.SetFontString(button, C.media.font, 12)
+text:SetPoint"CENTER"
+
+local processing = false
+
+local function OnEvent()
+	if(not MailFrame:IsShown()) then return end
+
+	local num = GetInboxNumItems()
+
+	local cash = 0
+	local items = 0
+	for i = 1, num do
+		local _, _, _, _, money, COD, _, item = GetInboxHeaderInfo(i)
+		if(item and COD<1) then items = items + item end
+		cash = cash + money
+	end
+	text:SetText(format("%d gold, %d items", floor(cash * 0.0001), items))
+
+	if(processing) then
+		if(num==0) then
+			processing = false
+			return
+		end
+
+		for i = num, 1, -1 do
+			local _, _, _, _, money, COD, _, itemCount, _, _, _, _, isGM = GetInboxHeaderInfo(i)
+			if not isGM then
+				if(itemCount and COD<1) then
+					AutoLootMailItem(i)
+					return
+				end
+				if(money>0) then
+					TakeInboxMoney(i)
+					return
+				end
+			end
+		end
+	end
+end
+
+local function OnClick()
+	MiniMapMailFrame:Hide()
+	if(not processing) then
+		processing = true
+		OnEvent()
+	end
+end
+
+local function OnHide()
+	processing = false
+end
+
+button:RegisterEvent("MAIL_INBOX_UPDATE")
+button:SetScript("OnEvent", OnEvent)
+button:SetScript("OnClick", OnClick)
+button:SetScript("OnHide", OnHide)
