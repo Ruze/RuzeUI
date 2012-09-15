@@ -6,6 +6,8 @@
 ## OptionalDeps: RuzeUI_ConfigUI
 
 changes.lua
+modules\unitframes\tags\tags.lua
+modules\unitframes\layout\tukui.lua
 classtimer.lua
 filger.lua
 modules\misc\mail.lua

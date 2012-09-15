@@ -5,6 +5,11 @@ C["general"] = {
 	["bordercolor"] = { .2,.2,.2 },						-- default border color of panels
 }
 
+C["unitframes"] = {
+	["enable"] = false,                             -- enable Tukui layout
+	["enable2"] = true,                             -- enable RuzeUI layout (Tukui layout must be disabled)
+}
+
 C["actionbar"] = {
 	["buttonsize"] = 32,								-- normal buttons size
 }
