@@ -1937,7 +1937,7 @@ oUF:RegisterStyle("Tukui", Shared)
 
 -- player
 local player = oUF:Spawn("player", "TukuiPlayer")
-player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", 0,8+adjustXY)
+player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", 70,8+adjustXY)
 player:SetParent(TukuiPetBattleHider)
 if T.lowversion then
 	player:Size(186, 51)
@@ -1948,14 +1948,14 @@ G.UnitFrames.Player = player
 
 -- focus
 local focus = oUF:Spawn("focus", "TukuiFocus")
-focus:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", 0 - adjust, 300)
+focus:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", 70 - adjust, 300)
 focus:SetParent(TukuiPetBattleHider)
 focus:Size(200, 29)
 G.UnitFrames.Focus = focus
 
 -- target
 local target = oUF:Spawn("target", "TukuiTarget")
-target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 0,8+adjustXY)
+target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", -70,8+adjustXY)
 target:SetParent(TukuiPetBattleHider)
 if T.lowversion then
 	target:Size(186, 51)
@@ -2003,7 +2003,7 @@ if C.unitframes.arena then
 		arena[i] = oUF:Spawn("arena"..i, "TukuiArena"..i)
 		arena[i]:SetParent(TukuiPetBattleHider)
 		if i == 1 then
-			arena[i]:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 0 + adjust, 300)
+			arena[i]:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", -70 + adjust, 300)
 		else
 			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 35)
 		end
@@ -2089,7 +2089,7 @@ if C["unitframes"].showboss then
 		boss[i] = oUF:Spawn("boss"..i, "TukuiBoss"..i)
 		boss[i]:SetParent(TukuiPetBattleHider)
 		if i == 1 then
-			boss[i]:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 0 + adjust, 300)
+			boss[i]:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", -70 + adjust, 300)
 		else
 			boss[i]:SetPoint("BOTTOM", boss[i-1], "TOP", 0, 35)             
 		end
