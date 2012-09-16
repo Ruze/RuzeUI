@@ -10,9 +10,7 @@ local _, ns = ...
 	
 ]]
 
-ns.Filger_Settings = {
-	configmode = C.filger.filgerconfig,
-}
+configmode = C.filger.filgerconfig,
 
 
 ns.Filger_Spells = {
@@ -1230,7 +1228,7 @@ if Filger_Spells and Filger_Spells[class] then
 		frame:Height(Filger_Spells[class][i][1] and Filger_Spells[class][i][1].size or 20)
 		frame:Point(unpack(data.setPoint))
 
-		if (f_s.configmode) then
+		if (configmode) then
 			for j = 1, #Filger_Spells[class][i], 1 do
 				data = Filger_Spells[class][i][j]
 				if not active[i] then
