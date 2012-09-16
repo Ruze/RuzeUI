@@ -84,3 +84,122 @@ TukuiMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -20, -20)
 local PlayerProccs = CreateFrame("Frame", "FilgerPlayerProccs", UIParent)
 PlayerProccs:Size(50, 50)
 PlayerProccs:Point("BOTTOMRIGHT", TukuiPlayer, "TOPRIGHT", 0, 4)
+
+---------------------------------------------------------------
+-- Functions
+---------------------------------------------------------------
+-- Anchor buff frame accordingly
+T.ComboPointsBarUpdate = function(self, parent, points)
+	local s = parent.shadow
+	local b = parent.Buffs
+		
+	if T.myclass == "ROGUE" and C.unitframes.movecombobar then
+		-- always show we this option enabled
+		s:Point("TOPLEFT", -4, 12)
+		b:Point("BOTTOMRIGHT", parent, "TOPRIGHT", 0, 13)
+		self:Show()
+	else
+		if points > 0 then
+			if s then
+				s:Point("TOPLEFT", -4, 12)
+			end
+			if b then 
+				b:ClearAllPoints() 
+				b:SetPoint("BOTTOMLEFT", parent, "TOPLEFT", 0, 14)
+			end
+		else
+			if s then
+				s:Point("TOPLEFT", -4, 4)
+			end
+			if b then 
+				b:ClearAllPoints() 
+				b:SetPoint("BOTTOMLEFT", parent, "TOPLEFT", 0, 4)
+			end
+		end
+	end
+end
+
+T.DruidBarDisplay = function(self, login)
+	local eb = self.EclipseBar
+	local m = self.WildMushroom
+	local dm = self.DruidMana
+	local shadow = self.shadow
+	local buff = self.Buffs
+	local bg = self.DruidManaBackground
+	local flash = self.FlashInfo
+
+	if login then
+		dm:SetScript("OnUpdate", nil)
+	end
+	
+	if dm and dm:IsShown() then
+		shadow:Point("TOPLEFT", -4, 12)
+		buff:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 13)
+		bg:SetAlpha(1)
+	else
+		flash:Show()
+		shadow:Point("TOPLEFT", -4, 4)
+		buff:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 4)
+		if bg then bg:SetAlpha(0) end
+	end
+		
+	if (eb and eb:IsShown()) or (dm and dm:IsShown()) then
+		if eb and eb:IsShown() then
+			local txt = self.EclipseBar.Text
+			txt:Show()
+			flash:Hide()
+		end
+		shadow:Point("TOPLEFT", -4, 12)
+		buff:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 13)
+		if bg then bg:SetAlpha(1) end
+		
+		-- mushroom
+		if m and m:IsShown() then
+			shadow:Point("TOPLEFT", -4, 21)
+			buff:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 22)
+			m:ClearAllPoints()
+			m:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
+		end
+	else
+		if eb then
+			local txt = self.EclipseBar.Text
+			txt:Hide()
+		end
+		flash:Show()
+		shadow:Point("TOPLEFT", -4, 4)
+		buff:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 4)
+		if bg then bg:SetAlpha(0) end
+		
+		-- mushroom
+		if m and m:IsShown() then
+			shadow:Point("TOPLEFT", -4, 12)
+			buff:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 13)
+			m:ClearAllPoints()
+			m:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+		end
+	end
+end
+
+T.UpdateMushroomVisibility = function(self)
+	local p = self:GetParent()
+	local eb = p.EclipseBar
+	local dm = p.DruidMana
+	local m = p.WildMushroom
+	local shadow = p.shadow
+	local buff = p.Buffs
+	
+	if (eb and eb:IsShown()) or (dm and dm:IsShown()) then
+		shadow:Point("TOPLEFT", -4, 21)
+		buff:Point("BOTTOMRIGHT", p, "TOPRIGHT", 0, 22)
+		m:ClearAllPoints()
+		m:Point("BOTTOMLEFT", p, "TOPLEFT", 0, 10)
+	elseif m:IsShown() then
+		shadow:Point("TOPLEFT", -4, 12)
+		buff:Point("BOTTOMRIGHT", p, "TOPRIGHT", 0, 13)
+		m:ClearAllPoints()
+		m:Point("BOTTOMLEFT", p, "TOPLEFT", 0, 1)
+	else
+		shadow:Point("TOPLEFT", -4, 4)
+		buff:Point("BOTTOMRIGHT", p, "TOPRIGHT", 0, 4)
+	end
+end

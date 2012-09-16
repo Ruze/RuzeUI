@@ -231,6 +231,22 @@ local function Shared(self, unit)
 		end
 			
 		if (unit == "player") then
+			-- player buff frames
+			local buffs = CreateFrame("Frame", nil, self)
+			buffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 0, 4)
+			buffs:SetHeight(26)
+			buffs:SetWidth(252)
+			buffs.size = 26
+			buffs.num = 9
+			buffs.numRow = 9
+			buffs.spacing = 2
+			buffs.initialAnchor = "TOPRIGHT"
+			buffs["growth-y"] = "UP"
+			buffs["growth-x"] = "LEFT"
+			buffs.PostCreateIcon = T.PostCreateAura
+			buffs.PostUpdateIcon = T.PostUpdateAura
+			self.Buffs = buffs
+			
 			-- combat icon
 			local Combat = health:CreateTexture(nil, "OVERLAY")
 			Combat:Height(19)
