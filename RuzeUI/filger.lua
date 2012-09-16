@@ -10,7 +10,7 @@ local _, ns = ...
 	
 ]]
 
-configmode = C.filger.filgerconfig,
+configmode = C.filger.filgerconfig
 
 if C["filger"].anchor == true then
 	FilgerPlayerBuffs = PlayerAnchor

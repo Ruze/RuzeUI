@@ -7,7 +7,7 @@
 
 changes.lua
 modules\unitframes\tags\tags.lua
-modules\unitframes\layout\tukui.lua
+modules\unitframes\layouts\tukui.lua
 classtimer.lua
 filger.lua
 modules\misc\mail.lua
