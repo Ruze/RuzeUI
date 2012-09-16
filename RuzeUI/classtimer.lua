@@ -1,5 +1,5 @@
 local T, C, L = unpack(Tukui)
-if C["unitframes"].enable == false or C["classtimer"].enable == false then return end
+if C["classtimer"].enable == false then return end
 --[[ Configuration functions - DO NOT TOUCH
 	id - spell id
 	castByAnyone - show if aura wasn't created by player
@@ -688,12 +688,9 @@ do
 		local result = parent:CreateTexture( nil, "BACKGROUND", nil );
 		local texture = parent:CreateTexture( nil, "OVERLAY", nil );		
 
-		--texture:Point( "TOPLEFT", result, "TOPLEFT", 10, -10 );
-		--texture:Point( "BOTTOMRIGHT", result, "BOTTOMRIGHT", -10, 10 );
-		
 		texture:Point( "TOPLEFT", result, "TOPLEFT", 3, -3 );
 		texture:Point( "BOTTOMRIGHT", result, "BOTTOMRIGHT", -3, 3 );
-			
+		
 		result.texture = texture;
 		
 		result.SetTexture = SetTexture;
@@ -1084,42 +1081,30 @@ trinketDataSource:AddFilter( TRINKET_FILTER, TRINKET_BAR_COLOR )
 
 local yOffset = 4
 local xOffset = 0
-if C["unitframes"].charportrait == true then xOffset = -44 end
 
-local playerFrame = CreateAuraBarFrame( playerDataSource, TukuiPlayer );
+local playerFrame = CreateAuraBarFrame( playerDataSource, UIParent );
 playerFrame:SetHiddenHeight( -yOffset );
+if C["classtimer"].anchor then
+	playerFrame:Point( "BOTTOMLEFT", PlayerAnchor, "BOTTOMLEFT", 0, 0 )
+	playerFrame:Point( "BOTTOMRIGHT", PlayerAnchor, "BOTTOMRIGHT", 0, 0 )
+else
+	playerFrame:Point( "BOTTOMLEFT", ClasstimerBuffs, "TOPLEFT", 0, 0 )
+	playerFrame:Point( "BOTTOMRIGHT", ClasstimerBuffs, "TOPRIGHT", 0, 0 )
+end
 
-
-		if TukuiFocus:IsShown() then
-			playerFrame:Point( "BOTTOMLEFT", TukuiPlayer, "TOPLEFT", xOffset, yOffset   + TukuiFocus:GetHeight() +6)
-		else
-			playerFrame:Point( "BOTTOMLEFT", TukuiPlayer, "TOPLEFT", xOffset, 13 )
-		end
-		TukuiFocus:HookScript("OnShow", function()
-			playerFrame:Point( "BOTTOMLEFT", TukuiPlayer, "TOPLEFT", xOffset, yOffset   + TukuiFocus:GetHeight() +6)
-		end)
-		TukuiFocus:HookScript("OnHide", function()
-			playerFrame:Point( "BOTTOMLEFT", TukuiPlayer, "TOPLEFT", xOffset, 13 )
-		end)	
-	playerFrame:Point( "BOTTOMRIGHT", TukuiPlayer, "TOPRIGHT", 0, yOffset )
-
-local trinketFrame = CreateAuraBarFrame( trinketDataSource, TukuiPlayer )
+local trinketFrame = CreateAuraBarFrame( trinketDataSource, UIParent )
 trinketFrame:SetHiddenHeight( -yOffset )
 trinketFrame:Point( "BOTTOMLEFT", playerFrame, "TOPLEFT", 0, yOffset )
 trinketFrame:Point( "BOTTOMRIGHT", playerFrame, "TOPRIGHT", 0, yOffset )
 
 if not targetdebuffs then
-	local targetFrame = CreateAuraBarFrame( targetDataSource, TukuiPlayer )
+	local targetFrame = CreateAuraBarFrame( targetDataSource, UIParent )
 	targetFrame:SetHiddenHeight( -yOffset )
 	targetFrame:Point( "BOTTOMLEFT", trinketFrame, "TOPLEFT", 0, yOffset )
 	targetFrame:Point( "BOTTOMRIGHT", trinketFrame, "TOPRIGHT", 0, yOffset )
 else
-	local targetFrame = CreateAuraBarFrame( targetDataSource, TukuiTarget )
+	local targetFrame = CreateAuraBarFrame( targetDataSource, UIParent )
 	targetFrame:SetHiddenHeight( -yOffset )
-	targetFrame:Point( "BOTTOMLEFT", TukuiTarget, "TOPLEFT", 0, 65 )
-	if C["unitframes"].charportrait == true then
-		targetFrame:Point( "BOTTOMRIGHT", TukuiTarget, "TOPRIGHT", 44, 85 )
-	else
-		targetFrame:Point( "BOTTOMRIGHT", TukuiTarget, "TOPRIGHT", -2, 85 )
-	end
+	targetFrame:Point( "BOTTOMLEFT", ClasstimerDebuffs, "TOPLEFT", 0, 0 )
+	targetFrame:Point( "BOTTOMRIGHT", ClasstimerDebuffs, "TOPRIGHT", 0, 0 )
 end

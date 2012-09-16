@@ -245,6 +245,7 @@ local function Shared(self, unit)
 			buffs["growth-x"] = "LEFT"
 			buffs.PostCreateIcon = T.PostCreateAura
 			buffs.PostUpdateIcon = T.PostUpdateAura
+			buffs.PostUpdate = T.UpdatePlayerBuffheader
 			self.Buffs = buffs
 			
 			-- combat icon
@@ -422,6 +423,7 @@ local function Shared(self, unit)
 			-- mage
 			if C.unitframes.mageclassbar and T.myclass == "MAGE" then
 				self.shadow:Point("TOPLEFT", -4, 12)
+				self.Buffs:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 13)
 				
 				local mb = CreateFrame("Frame", "TukuiArcaneBar", self)
 				mb:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
@@ -458,11 +460,13 @@ local function Shared(self, unit)
 				mb:SetScript("OnShow", function(self) 
 					local f = self:GetParent()
 					f.shadow:Point("TOPLEFT", -4, 12)
+					self.Buffs:Point("BOTTOMRIGHT", f, "TOPRIGHT", 0, 13)
 				end)
 				
 				mb:SetScript("OnHide", function(self)
 					local f = self:GetParent()
 					f.shadow:Point("TOPLEFT", -4, 4)
+					self.Buffs:Point("BOTTOMRIGHT", f, "TOPRIGHT", 0, 4)
 				end)
 				
 				self.ArcaneChargeBar = mb
@@ -515,6 +519,7 @@ local function Shared(self, unit)
 				
 				if T.myclass == "WARLOCK" then
 					self.shadow:Point("TOPLEFT", -4, 12)
+					self.Buffs:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 13)
 					
 					local wb = CreateFrame("Frame", "TukuiWarlockSpecBars", self)
 					wb:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
@@ -551,11 +556,13 @@ local function Shared(self, unit)
 					wb:SetScript("OnShow", function(self) 
 						local f = self:GetParent()
 						f.shadow:Point("TOPLEFT", -4, 12)
+						f.Buffs:Point("BOTTOMRIGHT", f, "TOPRIGHT", 0, 13)
 					end)
 					
 					wb:SetScript("OnHide", function(self)
 						local f = self:GetParent()
 						f.shadow:Point("TOPLEFT", -4, 4)
+						f.Buffs:Point("BOTTOMRIGHT", f, "TOPRIGHT", 0, 4)
 					end)
 					
 					self.WarlockSpecBars = wb				
@@ -564,6 +571,7 @@ local function Shared(self, unit)
 				-- set holy power bar or shard bar
 				if (T.myclass == "PALADIN") then
 					self.shadow:Point("TOPLEFT", -4, 11)
+					self.Buffs:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 13)
 		
 					local bars = CreateFrame("Frame", nil, self)
 					bars:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
@@ -616,6 +624,7 @@ local function Shared(self, unit)
 				if T.myclass == "DEATHKNIGHT" then
 					-- rescale top shadow border
 					self.shadow:Point("TOPLEFT", -4, 12)
+					self.Buffs:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 13)
 					
 					local Runes = CreateFrame("Frame", nil, self)
 					Runes:Point("BOTTOMLEFT", self, "TOPLEFT", 0,1)
@@ -673,11 +682,13 @@ local function Shared(self, unit)
 					bar:SetScript("OnShow", function(self) 
 						local f = self:GetParent()
 						f.shadow:Point("TOPLEFT", -4, 22)
+						f.Buffs:Point("BOTTOMRIGHT", f, "TOPRIGHT", 0, 22)
 					end)
 					
 					bar:SetScript("OnHide", function(self)
 						local f = self:GetParent()
 						f.shadow:Point("TOPLEFT", -4, 12)
+						f.Buffs:Point("BOTTOMRIGHT", f, "TOPRIGHT", 0, 13)
 					end)
 
 					self.Statue = bar
@@ -702,11 +713,13 @@ local function Shared(self, unit)
 					bar:SetScript("OnShow", function(self) 
 						local f = self:GetParent()
 						f.shadow:Point("TOPLEFT", -4, 12)
+						f.Buffs:Point("BOTTOMRIGHT", f, "TOPRIGHT", 0, 13)
 					end)
 					
 					bar:SetScript("OnHide", function(self)
 						local f = self:GetParent()
 						f.shadow:Point("TOPLEFT", -4, 4)
+						f.Buffs:Point("BOTTOMRIGHT", f, "TOPRIGHT", 0, 4)
 					end)
 
 					self.Statue = bar				
@@ -715,6 +728,7 @@ local function Shared(self, unit)
 				-- Monk harmony bar
 				if T.myclass == "MONK" then
 					self.shadow:Point("TOPLEFT", -4, 12)
+					self.Buffs:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 13)
 					
 					local hb = CreateFrame("Frame", "TukuiHarmony", health)
 					hb:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
@@ -766,11 +780,13 @@ local function Shared(self, unit)
 					bar:SetScript("OnShow", function(self) 
 						local f = self:GetParent()
 						f.shadow:Point("TOPLEFT", -4, 22)
+						f.Buffs:Point("BOTTOMRIGHT", f, "TOPRIGHT", 0, 22)
 					end)
 					
 					bar:SetScript("OnHide", function(self)
 						local f = self:GetParent()
 						f.shadow:Point("TOPLEFT", -4, 12)
+						f.Buffs:Point("BOTTOMRIGHT", f, "TOPRIGHT", 0, 13)
 					end)
 
 					self.Statue = bar
@@ -779,6 +795,7 @@ local function Shared(self, unit)
 				-- priest
 				if T.myclass == "PRIEST" then
 					self.shadow:Point("TOPLEFT", -4, 12)
+					self.Buffs:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 13)
 					
 					local pb = CreateFrame("Frame", "TukuiShadowOrbsBar", self)
 					pb:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
@@ -813,11 +830,13 @@ local function Shared(self, unit)
 					pb:SetScript("OnShow", function(self) 
 						local f = self:GetParent()
 						f.shadow:Point("TOPLEFT", -4, 12)
+						f.Buffs:Point("BOTTOMRIGHT", f, "TOPRIGHT", 0, 13)
 					end)
 					
 					pb:SetScript("OnHide", function(self)
 						local f = self:GetParent()
 						f.shadow:Point("TOPLEFT", -4, 4)
+						f.Buffs:Point("BOTTOMRIGHT", f, "TOPRIGHT", 0, 4)
 					end)
 					
 					self.ShadowOrbsBar = pb
@@ -840,11 +859,13 @@ local function Shared(self, unit)
 					bar:SetScript("OnShow", function(self) 
 						local f = self:GetParent()
 						f.shadow:Point("TOPLEFT", -4, 12)
+						f.Buffs:Point("BOTTOMRIGHT", f, "TOPRIGHT", 0, 13)
 					end)
 					
 					bar:SetScript("OnHide", function(self)
 						local f = self:GetParent()
 						f.shadow:Point("TOPLEFT", -4, 4)
+						f.Buffs:Point("BOTTOMRIGHT", f, "TOPRIGHT", 0, 4)
 					end)
 
 					self.Statue = bar
@@ -854,6 +875,7 @@ local function Shared(self, unit)
 				if T.myclass == "SHAMAN" then
 					-- rescale top shadow border
 					self.shadow:Point("TOPLEFT", -4, 12)
+					self.Buffs:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 13)
 					
 					local TotemBar = {}
 					TotemBar.Destroy = true

@@ -12,6 +12,11 @@ local _, ns = ...
 
 configmode = C.filger.filgerconfig,
 
+if C["filger"].anchor == true then
+	FilgerPlayerBuffs = PlayerAnchor
+else
+	FilgerPlayerBuffs = FilgerPlayerBuffs
+end
 
 ns.Filger_Spells = {
 		["MONK"] = { 
@@ -20,7 +25,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.proccs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", TukuiPlayer, "TOPRIGHT", 0, 10 },
+			setPoint = { "BOTTOMRIGHT", FilgerPlayerProcs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Combobreaker: Blackout-Kick
 			{ spellID = 116768, size = C.filger.iconsize, unitId = "player", caster = "player", filter = "BUFF" },				
@@ -35,7 +40,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.buffs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "LEFT", UIParent, "CENTER", -50, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerBuffs, "BOTTOMLEFT", 0, 0 },
 			
 			-- Zensphere
 			{ spellID = 124081, size = C.filger.iconsize, unitId = "player", caster = "player", filter = "BUFF" },
@@ -70,7 +75,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.cd,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "LEFT", UIParent, "CENTER", 50, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerCD, "BOTTOMLEFT", 0, 0 },
 			
 			-- Xuen
 			{ spellID = 123904, size = C.filger.iconsize, filter = "CD" },
@@ -95,7 +100,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.debuffs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "LEFT", UIParent, "CENTER", 0, 50 },
+			setPoint = { "BOTTOMRIGHT", FilgerTargetDebuffs, "BOTTOMRIGHT", 0, 0 },
 			
 			-- Risin Sun Kick
 			{ spellID = 107428, size = C.filger.iconsize, unitId = "target", caster = "all", filter = "DEBUFF" },
@@ -111,7 +116,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.proccs,
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerProccs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerPlayerProcs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Killing Machine
 			{ spellID = 51124, size = C.filger.iconsize, unitId = "player", caster = "player", filter = "BUFF" },
@@ -125,7 +130,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.buffs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerBuffs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerBuffs, "BOTTOMLEFT", 0, 0 },
 
 			-- Bone Shield
 			{ spellID = 49222, size = C.filger.iconsize, unitId = "player", caster = "player", filter = "BUFF" },
@@ -141,7 +146,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.debuffs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "RIGHT", FilgerTargetDebuffs, "RIGHT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerTargetDebuffs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Necrotic Strike
 			{ spellID = 73975, size = C.filger.iconsize, unitId = "target", caster = "player", filter = "DEBUFF" },
@@ -155,7 +160,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.cd,
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerCD, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerCD, "BOTTOMLEFT", 0, 0 },
 
 			--Death Grip
 			{ spellID = 49576, size = C.filger.iconsize, filter = "CD" },	
@@ -179,7 +184,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.procs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerProccs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerPlayerProcs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Maelstorm Weapon
 			{ spellID = 53817, size = C.filger.iconsize, unitId = "player", caster = "player", filter = "BUFF" },
@@ -197,7 +202,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.debuffs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "RIGHT", FilgerTargetDebuffs, "RIGHT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerTargetDebuffs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Hex
 			{ spellID = 51514, size = C.filger.iconsize, unitId = "target", caster = "all", filter = "DEBUFF" },
@@ -217,7 +222,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.cd,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerCD, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerCD, "BOTTOMLEFT", 0, 0 },
 
 			-- Water Elemental Freeze
 			{ spellID = 33395, size = C.filger.iconsize, filter = "CD" },
@@ -231,7 +236,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.buffs,
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerBuffs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerBuffs, "BOTTOMLEFT", 0, 0 },
 			
 			-- Frostfire Bolt aka Glyph of Frostfire
 			{ spellID = 44614, size = C.filger.iconsize, unitId = "target", caster = "all", filter = "DEBUFF" },
@@ -251,7 +256,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.proccs,
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerProccs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerPlayerProcs, "BOTTOMRIGHT", 0, 0 },
 			
 			--Brain Freeze
 			{ spellID = 57761, size = C.filger.iconsize, unitId = "player", caster = "player", filter = "BUFF" },
@@ -275,7 +280,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.buffs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerBuffs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerBuffs, "BOTTOMLEFT", 0, 0 },
 
 
 			-- Prayer of Mending
@@ -294,7 +299,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.cd,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerCD, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerCD, "BOTTOMLEFT", 0, 0 },
 
 			-- Mind Blast
 			{ spellID = 8092, size = C.filger.iconsize, filter = "CD" },
@@ -304,7 +309,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.proccs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerProccs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerPlayerProcs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Surge of Light
 			--MOP{ spellID = 88688, size = C.filger.iconsize, unitId = "player", caster = "all", filter = "BUFF" },
@@ -325,7 +330,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.debuffs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "RIGHT", FilgerTargetDebuffs, "RIGHT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerTargetDebuffs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Shackle undead
 			{ spellID = 9484, size = C.filger.iconsize, unitId = "target", caster = "all", filter = "DEBUFF" },
@@ -355,7 +360,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.proccs,
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerProccs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerPlayerProcs, "BOTTOMRIGHT", 0, 0 },
 
 			--Devious Minds
 			{ spellID = 70840, size = C.filger.iconsize, unitId = "player", caster = "player", filter = "BUFF" },
@@ -375,7 +380,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.buffs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerBuffs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerBuffs, "BOTTOMLEFT", 0, 0 },
 			
 			-- Fear
 			{ spellID = 5782, size = C.filger.iconsize, unitId = "target", caster = "all", filter = "DEBUFF" },
@@ -393,7 +398,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.debuffs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = {"RIGHT", FilgerTargetDebuffs, "RIGHT", 0, 0 },
+			setPoint = {"BOTTOMRIGHT", FilgerTargetDebuffs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Haunt
 			{ spellID = 48181, size = C.filger.iconsize, unitId = "target", caster = "player", filter = "DEBUFF" },
@@ -421,7 +426,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.cd,
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerCD, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerCD, "BOTTOMLEFT", 0, 0 },
 
 			-- SoulBurn
 			{ spellID = 74434, size = C.filger.iconsize, filter = "CD" },
@@ -451,7 +456,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.buffs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerBuffs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerBuffs, "BOTTOMLEFT", 0, 0 },
 
 			-- Lifebloom
 			{ spellID = 33763, size = C.filger.iconsize, unitId = "target", caster = "player", filter = "BUFF" },
@@ -468,7 +473,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.proccs,
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerProccs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerPlayerProcs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Eclipse (Lunar)
 			{ spellID = 48518, size = C.filger.iconsize, unitId = "player", caster = "player", filter = "BUFF" },
@@ -506,7 +511,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.debuffs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "RIGHT", FilgerTargetDebuffs, "RIGHT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerTargetDebuffs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Hibernate
 			{ spellID = 2637, size = C.filger.iconsize, unitId = "target", caster = "all", filter = "DEBUFF" },
@@ -538,7 +543,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.cd,
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerCD, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerCD, "BOTTOMLEFT", 0, 0 },
 
 			-- Celestial Alignment
 			{ spellID = 112071, size = C.filger.iconsize, filter = "CD" },
@@ -556,7 +561,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.proccs,
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerProccs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerPlayerProcs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Lock and Load
 			{ spellID = 56453, size = C.filger.iconsize, unitId = "player", caster = "player", filter = "BUFF" },
@@ -571,10 +576,10 @@ ns.Filger_Spells = {
 		},	
         {		
 			Name = "Buffs and Debuffs",
-			Direction = C.filger.buffs,
+			Direction = C.filger.debuffs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "RIGHT", FilgerTargetDebuffs, "RIGHT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerTargetDebuffs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Wyvern Sting
 			{ spellID = 19386, size = C.filger.iconsize, unitId = "target", caster = "all", filter = "DEBUFF" },
@@ -594,7 +599,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.cd,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerCD, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerCD, "BOTTOMLEFT", 0, 0 },
 			
 			-- Bad Manner
 			{ spellID = 90337, size = C.filger.iconsize, unitId = "player", caster = "player", filter = "CD" },
@@ -608,7 +613,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.buffs,
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerBuffs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerBuffs, "BOTTOMLEFT", 0, 0 },
 
 			-- Sprint
 			{ spellID = 2983, size = C.filger.iconsize, unitId = "player", caster = "player", filter = "BUFF" },
@@ -634,7 +639,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.debuffs,
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "RIGHT", FilgerTargetDebuffs, "RIGHT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerTargetDebuffs, "BOTTOMRIGHT", 0, 0 },
 
 			-- hemo bleed
 			{ spellID = 16511, size = C.filger.iconsize, unitId = "target", caster = "player", filter = "DEBUFF" },
@@ -674,7 +679,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.buffs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerBuffs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerBuffs, "BOTTOMLEFT", 0, 0 },
 
 			-- Beacon of Light -- player
 			{ spellID = 53563, size = C.filger.iconsize, unitId = "player", caster = "player", filter = "BUFF" },
@@ -692,7 +697,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.debuffs,
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "RIGHT", FilgerTargetDebuffs, "RIGHT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerTargetDebuffs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Beacon of Light -- target
 			{ spellID = 53563, size = C.filger.iconsize, unitId = "target", caster = "player", filter = "BUFF" },
@@ -708,7 +713,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.proccs,
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerProccs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerPlayerProcs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Infusion of Light
 			{ spellID = 54149, size = C.filger.iconsize, unitId = "player", caster = "player", filter = "BUFF" },
@@ -724,7 +729,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.cd,
 			Interval = 10,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerCD, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerCD, "BOTTOMLEFT", 0, 0 },
 			
 			-- judgement
 			{ spellID = 20271, size = C.filger.iconsize, filter = "CD" },
@@ -742,7 +747,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.proccs,
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerProccs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerPlayerProcs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Sudden Death
 			{ spellID = 52437, size = C.filger.iconsize, unitId = "player", caster = "player", filter = "BUFF" },
@@ -762,7 +767,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.buffs,
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerBuffs, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerBuffs, "BOTTOMLEFT", 0, 0 },
 			
 			-- Last Stand
 			{ spellID = 12975, size = C.filger.iconsize, unitId = "player", caster = "player", filter = "BUFF" },
@@ -774,7 +779,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.debuffs,
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "RIGHT", FilgerTargetDebuffs, "RIGHT", 0, 0 },
+			setPoint = { "BOTTOMRIGHT", FilgerTargetDebuffs, "BOTTOMRIGHT", 0, 0 },
 
 			-- Hamstring
 			{ spellID = 1715, size = C.filger.iconsize, unitId = "target", caster = "all", filter = "DEBUFF" },
@@ -792,7 +797,7 @@ ns.Filger_Spells = {
 			Direction = C.filger.cd,
 			Interval = 10,
 			Mode = "ICON",
-			setPoint = { "LEFT", FilgerPlayerCD, "LEFT", 0, 0 },
+			setPoint = { "BOTTOMLEFT", FilgerPlayerCD, "BOTTOMLEFT", 0, 0 },
 			
 			-- Recklesness
 			{ spellID = 1719, size = C.filger.iconsize, filter = "CD" },

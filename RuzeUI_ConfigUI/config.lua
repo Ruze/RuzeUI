@@ -16,6 +16,7 @@ C["actionbar"] = {
 
 C["classtimer"] = {
 	["enable"] = true,									-- enable classtimer
+	["anchor"] = true,									-- anchor to player frame (RuzeUI layout must be enabled)
 	["targetdebuffs"] = false,							-- position target debuffs above target
 	["playercolor"] = {.2, .2, .2 },					-- playerbarcolor
 	["targetbuffcolor"] = { 70/255, 150/255, 70/255 },	-- targetbarcolor (buff)
@@ -30,6 +31,7 @@ C["classtimer"] = {
 
 C["filger"] = {
 	["enable"] = false,									-- enable filger
+	["anchor"] = true,									-- anchor to player frame (RuzeUI layout must be enabled)
 	["filgerconfig"] = false,							-- filger config
 	["iconsize"] = 32,									-- set icon size
 	["proccs"] = "RIGHT",								-- set growth direction

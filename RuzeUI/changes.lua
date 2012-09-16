@@ -52,6 +52,60 @@ TukuiLineToABRight:ClearAllPoints()
 TukuiLineToABRight:Point("LEFT", TukuiBar1, "RIGHT", 1, -2)
 TukuiLineToABRight:Point("RIGHT", TukuiInfoRight, "LEFT", -1, 0)
 
+-- TukuiPlayer anchor frame
+panchor = CreateFrame("Frame", "PlayerAnchor", UIParent)
+panchor:Height(1)
+if T.lowversion then
+	panchor:SetWidth(186)
+else
+	panchor:SetWidth(250)
+end
+
+-- Create frame for Classtimer buffs
+local CtimerBuffs = CreateFrame("Frame", "ClasstimerBuffs", UIParent)
+CtimerBuffs:Height(1)
+if T.lowversion then
+	CtimerBuffs:SetWidth(186)
+else
+	CtimerBuffs:SetWidth(250)
+end
+CtimerBuffs:Point( "BOTTOMLEFT", UIParent, "CENTER", -374, -285 )
+
+-- Create frame for Classtimer debuffs
+local CtimerDebuffs = CreateFrame("Frame", "ClasstimerDebuffs", UIParent)
+CtimerDebuffs:Height(1)
+if T.lowversion then
+	CtimerDebuffs:SetWidth(186)
+else
+	CtimerDebuffs:SetWidth(250)
+end
+CtimerDebuffs:Point( "BOTTOMRIGHT", UIParent, "CENTER", 374, -285 )
+
+-- Create frame for Filger buffs
+local FilgerBuffs = CreateFrame("Frame", "FilgerPlayerBuffs", UIParent)
+FilgerBuffs:Size(50, 50)
+FilgerBuffs:Point( "BOTTOMLEFT", UIParent, "CENTER", -374, -284 )
+
+-- Create frame for Filger cd
+local FilgerCD = CreateFrame("Frame", "FilgerPlayerCD", UIParent)
+FilgerCD:Size(50, 50)
+FilgerCD:Point( "BOTTOMLEFT", UIParent, "CENTER", -374, -216 )
+
+-- Create frame for Filger procs
+local FilgerProcs = CreateFrame("Frame", "FilgerPlayerProcs", UIParent)
+FilgerProcs:Size(50, 50)
+FilgerProcs:Point( "BOTTOMRIGHT", UIParent, "CENTER", 374, -216 )
+
+-- Create frame for Filger debuffs
+local FilgerDebuffs = CreateFrame("Frame", "FilgerTargetDebuffs", UIParent)
+FilgerDebuffs:Size(50, 50)
+FilgerDebuffs:Point( "BOTTOMRIGHT", UIParent, "CENTER", 374, -284 )
+
+-- Create frame for Filger pve debuffs
+local FilgerPVEDebuffs = CreateFrame("Frame", "FilgerPVEDebuffs", UIParent)
+FilgerPVEDebuffs:Size(50, 50)
+-- FilgerPVEDebuffs:Point( "CENTER", UIParent, "CENTER", 0, -284 )
+
 ---------------------------------------------------------------
 -- Actionbars
 ---------------------------------------------------------------
@@ -76,14 +130,6 @@ TukuiAurasPlayerDebuffs:SetPoint("BOTTOMRIGHT", TukuiMinimap, "BOTTOMLEFT", -20,
 -- Move minimap for padding
 TukuiMinimap:ClearAllPoints()
 TukuiMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -20, -20)
-
----------------------------------------------------------------
--- Filger
----------------------------------------------------------------
--- Create frame for FilgerPlayerProccs
-local PlayerProccs = CreateFrame("Frame", "FilgerPlayerProccs", UIParent)
-PlayerProccs:Size(50, 50)
-PlayerProccs:Point("BOTTOMRIGHT", TukuiPlayer, "TOPRIGHT", 0, 4)
 
 ---------------------------------------------------------------
 -- Functions
@@ -202,4 +248,19 @@ T.UpdateMushroomVisibility = function(self)
 		shadow:Point("TOPLEFT", -4, 4)
 		buff:Point("BOTTOMRIGHT", p, "TOPRIGHT", 0, 4)
 	end
+end
+
+T.UpdatePlayerBuffheader = function(self)
+	if not C["classtimer"].enable and not C["filger"].enable then return end
+	if not C["classtimer"].anchor and not C["filger"].anchor then return end
+	
+	local numBuffs = self.visibleBuffs
+	local perRow = self.numRow
+	local s = self.size + 2
+	local row = math.ceil((numBuffs / perRow))
+	local y = s * row + 2
+	local addition = s
+	
+	if numBuffs == 0 then addition = 0 end
+	PlayerAnchor:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 2, y)
 end
