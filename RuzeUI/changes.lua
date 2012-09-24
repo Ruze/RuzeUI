@@ -1,6 +1,20 @@
 local T, C, L, G = unpack(Tukui)
 
 ---------------------------------------------------------------
+-- Blizzard
+---------------------------------------------------------------
+-- watchframe anchoring
+local function moveTracker()
+	if TukuiBar5:IsShown() then
+		TukuiWatchFrameAnchor:Point("TOPRIGHT", UIParent, -210, -220)
+	else
+		TukuiWatchFrameAnchor:Point("TOPRIGHT", UIParent, -10, -220)
+	end
+end
+TukuiBar5:SetScript("OnShow", moveTracker)
+TukuiBar5:SetScript("OnHide", moveTracker)
+
+---------------------------------------------------------------
 -- Tooltip
 ---------------------------------------------------------------
 -- Remove border colouring
